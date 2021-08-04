@@ -1,0 +1,102 @@
+# Generation of Kubernetes YAML is still under development!
+#
+# Save the output of this file and use kubectl create -f to import
+# it into Kubernetes.
+#
+# Created with podman-3.2.3
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: "2021-08-04T19:34:26Z"
+  labels:
+    app: flask-mysql-pod
+  name: flask-mysql-pod
+spec:
+  containers:
+  - command:
+    - /bin/sh
+    - -c
+    - python3 run.py
+    env:
+    - name: PATH
+      value: /usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+    - name: TERM
+      value: xterm
+    - name: container
+      value: podman
+    - name: PYTHON_GET_PIP_URL
+      value: https://github.com/pypa/get-pip/raw/a1675ab6c2bd898ed82b1f58c486097f763c74a9/public/get-pip.py
+    - name: GPG_KEY
+      value: E3FF2839C048B25C084DEBE9B26995E310250568
+    - name: LANG
+      value: C.UTF-8
+    - name: PYTHON_VERSION
+      value: 3.9.6
+    - name: PYTHON_PIP_VERSION
+      value: 21.2.2
+    - name: PYTHON_GET_PIP_SHA256
+      value: 6665659241292b2147b58922b9ffe11dda66b39d52d8a6f3aa310bc1d60ea6f7
+    image: localhost/flask-rest-api-mysql-v1.2:latest
+    name: flask-rest-api-pod-version
+    ports:
+    - containerPort: 5000
+      hostPort: 5000
+      protocol: TCP
+    resources: {}
+    securityContext:
+      allowPrivilegeEscalation: true
+      capabilities:
+        drop:
+        - CAP_MKNOD
+        - CAP_NET_RAW
+        - CAP_AUDIT_WRITE
+      privileged: false
+      readOnlyRootFilesystem: false
+      seLinuxOptions: {}
+    workingDir: /flask-rest-api
+  - args:
+    - --default-authentication-plugin=mysql_native_password
+    command:
+    - docker-entrypoint.sh
+    env:
+    - name: PATH
+      value: /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+    - name: TERM
+      value: xterm
+    - name: container
+      value: podman
+    - name: GOSU_VERSION
+      value: "1.12"
+    - name: MYSQL_MAJOR
+      value: "8.0"
+    - name: MYSQL_VERSION
+      value: 8.0.26-1debian10
+    - name: MYSQL_ROOT_PASSWORD
+      value: admin
+    - name: MYSQL_DATABASE
+      value: Colors_flask_api
+    image: docker.io/library/mysql:latest
+    name: mysql-db-pod-version
+    resources: {}
+    securityContext:
+      allowPrivilegeEscalation: true
+      capabilities:
+        drop:
+        - CAP_MKNOD
+        - CAP_NET_RAW
+        - CAP_AUDIT_WRITE
+      privileged: false
+      readOnlyRootFilesystem: false
+      seLinuxOptions: {}
+    volumeMounts:
+    - mountPath: /var/lib/mysql
+      name: 66f3ff66d37cd7c7aa7b7d3391f4b2721db10d78d7346b69a32f0f020a901ecb-pvc
+    workingDir: /
+  dnsConfig: {}
+  restartPolicy: Always
+  volumes:
+  - name: 66f3ff66d37cd7c7aa7b7d3391f4b2721db10d78d7346b69a32f0f020a901ecb-pvc
+    persistentVolumeClaim:
+      claimName: 66f3ff66d37cd7c7aa7b7d3391f4b2721db10d78d7346b69a32f0f020a901ecb
+status: {}
+
