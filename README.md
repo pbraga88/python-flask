@@ -41,6 +41,12 @@ curl -X GET http://127.0.0.1:5000/colors/cyan
 curl -X POST -H "Content-Type: application/json" -d '{"color":"white","value":"#fff"}' "http://127.0.0.1:5000/colors"
 ```
 
+## **Documentation (Flasgger)**
+The documentation was written using Flasgger lib, so, to access it once the server is up, one can use the browser:
+```
+http://127.0.0.1:5000/apidocs/
+```
+All the methods should be listed and documented. Also, it's possible to execute the API methods from Flasgger interface.
 ## **Author**
 Paulo Simplicio Braga\
 paulo.braga1388@gmail.com

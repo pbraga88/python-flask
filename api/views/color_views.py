@@ -8,9 +8,22 @@ from flask import request
 from ..entities import color
 from ..services import color_service
 
-class ColorList(Resource):
-    """ get all values"""
+class ColorList(Resource): 
     def get(self):
+        """
+        List the whole list of colors
+        ---
+        responses:
+          200:
+            description: Colors listed
+            schema:
+              id: Color
+              properties:
+                color:
+                  type: string
+                calue:
+                  type: string
+        """
         colors = color_service.list_colors()
         #many=True to deserialize more than one object
         cs = color_schema.ColorSchema(many=True)
@@ -18,6 +31,36 @@ class ColorList(Resource):
         return make_response(cs.jsonify(colors), 200)
 
     def post(self):
+        """
+        Insert a new color
+        ---
+        parameters:
+        - in: body
+          name: color
+          description: Create a new color
+          schema:
+            type: object
+            required:
+              - color
+              - value
+            properties:
+              color:
+                type: string
+              value:
+                type: string
+        responses:
+          201:
+            description: Color successfully created
+            schema:
+              id: Color
+              properties:
+                color:
+                  type: string
+                calue:
+                  type: string
+          400:
+            description: Bad request
+        """
         # create a instance of ColorSchema
         cs = color_schema.ColorSchema()
         # Validade the data in request body
@@ -39,6 +82,28 @@ class ColorList(Resource):
 class ColorDetail(Resource):
     # Get by id
     def get(self, id):
+        """
+        List color based on given id
+        ---
+        parameters:
+          - in: path
+            name: id
+            type: integer
+            required: true
+        responses:
+          200:
+            description: Colors listed
+            schema:
+              id: Color
+              properties:
+                color:
+                  type: string
+                calue:
+                  type: string
+          404:
+            description: Color not found
+        """
+
         # First verify if 'color' exists
         color = color_service.list_color_id(id)
         if color is None: # if id does not exist
@@ -52,6 +117,43 @@ class ColorDetail(Resource):
  
     # Edit by id
     def put(self, id):
+        """
+        Edit color based on given id
+        ---
+        parameters:
+          - in: path
+            name: id
+            type: integer
+            required: true
+          - in: body
+            name: Edit color
+            description: Edit an existing color
+            schema:
+              type: object
+              required:
+                - color
+                - value
+              properties:
+                color:
+                  type: string
+                value:
+                  type: string
+        responses:
+          200:
+            description: Color successfully edited
+            schema:
+              id: Color
+              properties:
+                color:
+                  type: string
+                calue:
+                  type: string
+          404:
+            description: Color not found
+          400:
+            description: Bad request
+        """
+
         # First verify if 'color' exists
         color_bd = color_service.list_color_id(id)
         if color_bd is None: # if id does not exist
@@ -71,6 +173,20 @@ class ColorDetail(Resource):
             return make_response(cs.jsonify(updated_color), 200)
     # Remove by id 
     def delete(self, id):
+        """
+        Remove color based on given ID
+        ---
+        parameters:
+          - in: path
+            name: id
+            type: integer
+            required: true
+        responses:
+          204:
+            description: Color successfully removed
+          404:
+            description: Color not found
+        """
         color = color_service.list_color_id(id)
         if color is None: # if id does not exist
             return make_response(jsonify("Color not found"), 404)
@@ -80,6 +196,28 @@ class ColorDetail(Resource):
 class ColorDetailByValue(Resource):
     # Get by value
     def get(self, color):
+        """
+        List color based on given color name
+        ---
+        parameters:
+          - in: path
+            name: color
+            type: string
+            required: true
+        responses:
+          200:
+            description: Colors listed
+            schema:
+              id: Color
+              properties:
+                color:
+                  type: string
+                calue:
+                  type: string
+          404:
+            description: Color not found
+        """
+
         # First verify if color value exists
         color_rgb = color_service.list_color_value(color)
         if color_rgb is None: # if color does not exist
@@ -92,6 +230,20 @@ class ColorDetailByValue(Resource):
             return make_response(cs.jsonify(color_rgb), 200)
    
     def delete(self, color):
+        """
+        Remove color based on given color name
+        ---
+        parameters:
+          - in: path
+            name: color
+            type: string
+            required: true
+        responses:
+          204:
+            description: Color successfully removed
+          404:
+            description: Color not found
+        """
         color_rgb = color_service.list_color_value(color)
         if color_rgb is None: # if id does not exist
             return make_response(jsonify("Color not found"), 404)

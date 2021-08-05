@@ -1,4 +1,4 @@
-''' Methods to access the SQLAlchemy and perform CRUD '''
+#Methods to access the SQLAlchemy and perform CRUD
 
 from ..models import color_model
 from api import db
