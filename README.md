@@ -21,15 +21,22 @@ Play the pod based on the Kubernetes .yaml file:
 ```
 podman play kube ./flask-mysql-pod.yam
 ```
+Finally, run the 'init.sh' script, which will fill the database and run an automated test suite (using python unittest) on the api CRUD methods:
+```
+./init.sh
+```
 ## **Executing CRUD methods**
 Once the pod is up, one can now send the http CRUD commands.\
 The follow examples use 'curl' linux tool, but other tools like postman should get the job done just fine:
 1. Retrieve the whole list of colors
     * curl -X GET http://127.0.0.1:5000/colors
-2. Retrieve a single color from the list
+2. Retrieve a single color from the list (e.g cyan)
     * curl -X GET http://127.0.0.1:5000/colors/cyan
-3. Insert a new color into the list
+3. Insert a new color into the list (e.g white)
     * curl -X POST -H "Content-Type: application/json" -d '{"color":"white","value":"#fff"}' "http://127.0.0.1:5000/colors"
+
+Additionally, is's also possible to run an automated test suite by accessing the container and triggering the test_api.py file, as follow:\
+[ADD THE STEPS TO ACCESS THE CONTAINER AND TRIGGER THE TESTS]
 
 ## **Author**
 Paulo Simplicio Braga\
