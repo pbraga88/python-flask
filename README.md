@@ -25,15 +25,21 @@ Finally, run the 'init.sh' script, which will fill the database and run an autom
 ```
 ./init.sh
 ```
-## **Executing CRUD methods**
+## **Executing (CRUD methods)**
 Once the pod is up, one can now send the http CRUD commands.\
 The follow examples use 'curl' linux tool, but other tools like postman should get the job done just fine:
-1. Retrieve the whole list of colors
-    * curl -X GET http://127.0.0.1:5000/colors
-2. Retrieve a single color from the list (e.g cyan)
-    * curl -X GET http://127.0.0.1:5000/colors/cyan
-3. Insert a new color into the list (e.g white)
-    * curl -X POST -H "Content-Type: application/json" -d '{"color":"white","value":"#fff"}' "http://127.0.0.1:5000/colors"
+1. Retrieve the whole list of colors:
+```
+curl -X GET http://127.0.0.1:5000/colors
+```
+2. Retrieve a single color from the list (e.g cyan):
+```
+curl -X GET http://127.0.0.1:5000/colors/cyan
+```
+3. Insert a new color into the list (e.g white):
+```
+curl -X POST -H "Content-Type: application/json" -d '{"color":"white","value":"#fff"}' "http://127.0.0.1:5000/colors"
+```
 
 ## **Author**
 Paulo Simplicio Braga\
