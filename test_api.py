@@ -37,7 +37,7 @@ class TestApi(unittest.TestCase):
 
 if __name__ == "__main__":
     tester = TestApi()
-    # Execute tests
+    #Execute tests
     tester.test_1_get_all_colors()
     tester.test_2_retrieve_single_color_by_id()
     tester.test_3_retrieve_single_color_by_value()

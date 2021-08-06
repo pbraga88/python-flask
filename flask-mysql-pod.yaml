@@ -7,37 +7,35 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  creationTimestamp: "2021-08-05T23:25:54Z"
+  creationTimestamp: "2021-08-06T16:39:50Z"
   labels:
     app: flask-mysql-pod
   name: flask-mysql-pod
 spec:
   containers:
-  - command:
-    - /bin/sh
-    - -c
-    - python3 run.py
+  - args:
+    - --default-authentication-plugin=mysql_native_password
+    command:
+    - docker-entrypoint.sh
     env:
     - name: PATH
-      value: /usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+      value: /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
     - name: TERM
       value: xterm
     - name: container
       value: podman
-    - name: PYTHON_VERSION
-      value: 3.9.6
-    - name: PYTHON_GET_PIP_URL
-      value: https://github.com/pypa/get-pip/raw/a1675ab6c2bd898ed82b1f58c486097f763c74a9/public/get-pip.py
-    - name: PYTHON_GET_PIP_SHA256
-      value: 6665659241292b2147b58922b9ffe11dda66b39d52d8a6f3aa310bc1d60ea6f7
-    - name: LANG
-      value: C.UTF-8
-    - name: GPG_KEY
-      value: E3FF2839C048B25C084DEBE9B26995E310250568
-    - name: PYTHON_PIP_VERSION
-      value: 21.2.2
-    image: localhost/flask-rest-api-mysql-v1.2:latest
-    name: flask-rest-api-pod-version
+    - name: MYSQL_ROOT_PASSWORD
+      value: admin
+    - name: MYSQL_DATABASE
+      value: Colors_flask_api
+    - name: MYSQL_VERSION
+      value: 8.0.26-1debian10
+    - name: GOSU_VERSION
+      value: "1.12"
+    - name: MYSQL_MAJOR
+      value: "8.0"
+    image: docker.io/library/mysql:latest
+    name: mysql-db-pod-version
     ports:
     - containerPort: 5000
       hostPort: 5000
@@ -53,30 +51,35 @@ spec:
       privileged: false
       readOnlyRootFilesystem: false
       seLinuxOptions: {}
-    workingDir: /flask-rest-api
-  - args:
-    - --default-authentication-plugin=mysql_native_password
-    command:
-    - docker-entrypoint.sh
+    volumeMounts:
+    - mountPath: /var/lib/mysql
+      name: 927185e35442407fabc0477e09c8baa94457924274576029cb3f2813383d7af1-pvc
+    workingDir: /
+  - command:
+    - /bin/sh
+    - -c
+    - python3 run.py
     env:
     - name: PATH
-      value: /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+      value: /usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
     - name: TERM
       value: xterm
     - name: container
       value: podman
-    - name: GOSU_VERSION
-      value: "1.12"
-    - name: MYSQL_MAJOR
-      value: "8.0"
-    - name: MYSQL_VERSION
-      value: 8.0.26-1debian10
-    - name: MYSQL_ROOT_PASSWORD
-      value: admin
-    - name: MYSQL_DATABASE
-      value: Colors_flask_api
-    image: docker.io/library/mysql:latest
-    name: mysql-db-pod-version
+    - name: LANG
+      value: C.UTF-8
+    - name: PYTHON_VERSION
+      value: 3.9.6
+    - name: PYTHON_GET_PIP_URL
+      value: https://github.com/pypa/get-pip/raw/a1675ab6c2bd898ed82b1f58c486097f763c74a9/public/get-pip.py
+    - name: PYTHON_PIP_VERSION
+      value: 21.2.2
+    - name: PYTHON_GET_PIP_SHA256
+      value: 6665659241292b2147b58922b9ffe11dda66b39d52d8a6f3aa310bc1d60ea6f7
+    - name: GPG_KEY
+      value: E3FF2839C048B25C084DEBE9B26995E310250568
+    image: localhost/flask-rest-api-mysql-v1.2:latest
+    name: flask-rest-api-pod-version
     resources: {}
     securityContext:
       allowPrivilegeEscalation: true
@@ -88,15 +91,12 @@ spec:
       privileged: false
       readOnlyRootFilesystem: false
       seLinuxOptions: {}
-    volumeMounts:
-    - mountPath: /var/lib/mysql
-      name: f1e6aec188f5f588d4341fc9a6b92c0d07fdc8991c192f847864c72e133faf9b-pvc
-    workingDir: /
+    workingDir: /flask-rest-api
   dnsConfig: {}
   restartPolicy: Always
   volumes:
-  - name: f1e6aec188f5f588d4341fc9a6b92c0d07fdc8991c192f847864c72e133faf9b-pvc
+  - name: 927185e35442407fabc0477e09c8baa94457924274576029cb3f2813383d7af1-pvc
     persistentVolumeClaim:
-      claimName: f1e6aec188f5f588d4341fc9a6b92c0d07fdc8991c192f847864c72e133faf9b
+      claimName: 927185e35442407fabc0477e09c8baa94457924274576029cb3f2813383d7af1
 status: {}
 
