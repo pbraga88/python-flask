@@ -21,7 +21,7 @@ class ColorList(Resource):
               properties:
                 color:
                   type: string
-                calue:
+                value:
                   type: string
         """
         colors = color_service.list_colors()
@@ -56,7 +56,7 @@ class ColorList(Resource):
               properties:
                 color:
                   type: string
-                calue:
+                value:
                   type: string
           400:
             description: Bad request
@@ -98,7 +98,7 @@ class ColorDetail(Resource):
               properties:
                 color:
                   type: string
-                calue:
+                value:
                   type: string
           404:
             description: Color not found
@@ -146,7 +146,7 @@ class ColorDetail(Resource):
               properties:
                 color:
                   type: string
-                calue:
+                value:
                   type: string
           404:
             description: Color not found
@@ -212,7 +212,7 @@ class ColorDetailByValue(Resource):
               properties:
                 color:
                   type: string
-                calue:
+                value:
                   type: string
           404:
             description: Color not found
