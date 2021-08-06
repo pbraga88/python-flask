@@ -19,7 +19,7 @@ podman build -t flask-rest-api-mysql-v1.2 .
 ```
 Play the pod based on the Kubernetes .yaml file:
 ```
-podman play kube ./flask-mysql-pod.yam
+podman play kube ./flask-mysql-pod.yaml
 ```
 Finally, run the 'init.sh' script, which will fill the database and run an automated test suite (using python unittest) on the api CRUD methods:
 ```
