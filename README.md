@@ -24,6 +24,8 @@ podman play kube ./flask-mysql-pod.yaml
 Finally, run the 'init.sh' script, which will fill the database and run an automated test suite (using python unittest) on the api CRUD methods:
 ```
 cd scripts/
+```
+```
 ./init.sh
 ```
 ## **Executing (CRUD methods)**
