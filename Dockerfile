@@ -6,9 +6,7 @@ COPY requirements.txt .
 
 RUN pip3 install -r requirements.txt
 
-COPY ./api ./api
-COPY config.py .
-COPY run.py .
+COPY ./src ./src
 
 EXPOSE 5000
-CMD python3 run.py
+CMD cd src && python3 run.py
