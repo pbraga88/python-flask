@@ -5,7 +5,7 @@ This is a simple Flask RESTful API which uses mysql for data storage. Both API a
 The goal of this project is to demonstrate how to come up with a Flask RESTful API using containers. For that purpose, containers are created for both API and mysql to be orchestrated by a pod. The final objective is to serve the color.json file and to be able to read it (as whole or per element) as well as to add new elements using http CRUD methods. 
 
 ## **Dependencies**
-podman version 3.2.3 or above\
+podman version 3.2.3\
 Ubuntu 20.04
 
 ## **Installation (Creating the pod)**
