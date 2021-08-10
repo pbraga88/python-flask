@@ -1,7 +1,7 @@
 from flask import Flask
 from flask_restful import Api
 from flask_sqlalchemy import SQLAlchemy
-from flask_migrate import Migrate # Enable if migration needed afterwards
+from flask_migrate import Migrate
 from flask_marshmallow import Marshmallow
 from flasgger import Swagger
 
@@ -13,7 +13,6 @@ db = SQLAlchemy(app)
 # Enable Marshmallow. After SQLAlchemy since it's linked to the database
 ma = Marshmallow(app)
 # Migrate will manage migration from app in mysql database
-# Disabled for now
 migrate = Migrate(app, db)
 
 api = Api(app) # This api is created based upon flask_restful

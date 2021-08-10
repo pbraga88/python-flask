@@ -3,7 +3,6 @@ import time
 from api import app
 
 def setEnv():
-    pass
     if not os.path.exists('migrations'):
         time.sleep(10) # wait for mysql container to initilize
         os.environ["FLASK_APP"] = "api.py"
