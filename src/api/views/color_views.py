@@ -253,6 +253,6 @@ class ColorDetailByValue(Resource):
 # Register classes as API resources. 
 # Class name and API route shall be given
 api.add_resource(ColorList, '/colors')
-api .add_resource(ColorDetail, '/colors/<int:id>') # use <int:id> since the type to
+api.add_resource(ColorDetail, '/colors/<int:id>') # use <int:id> since the type to
                                                    # be retrieved is int
-api .add_resource(ColorDetailByValue, '/colors/<string:color>')   
+api.add_resource(ColorDetailByValue, '/colors/<string:color>')   

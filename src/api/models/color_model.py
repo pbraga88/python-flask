@@ -1,4 +1,5 @@
 from api import db
+# Will determine what are the attributes/fields from the task which will be stored in the database
 
 # Inherits model from SQLAlchemy
 class Color(db.Model):
